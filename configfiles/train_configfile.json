@@ -1,0 +1,94 @@
+{
+
+    "data_path": "/opt2/data/datasets/UCA-GAIT/",
+    "partitions_path": "/opt2/data/datasets/UCA-GAIT/code/partitions",
+    "save_dir": "/opt2/data/datasets/UCA-GAIT/healthgait/train_results",
+
+    "patients_measures": "/opt2/data/datasets/UCA-GAIT/patients_measures.csv",
+    "gait_parameters": "/opt2/data/datasets/UCA-GAIT/gait_parameters.csv",
+    "gait_parameters_estimation": "/opt2/data/datasets/UCA-GAIT/gait_parameters_estimation.csv",
+
+    "MoviNet": {
+
+        "train_sex": {
+            "seed": 27,
+            "epochs": 10000,
+            "img_size": 224,
+            "num_frames": 40,
+            "batch_size": 32,
+            "learning_rate": 0.001,
+            "id_experiment": "00",
+            "wandb_project": "Sex_Classification"
+        },
+
+        "train_weight": {
+            "seed": 27,
+            "epochs": 10000,
+            "img_size": 224,
+            "num_frames": 40,
+            "batch_size": 32,
+            "learning_rate": 0.0001,
+            "units": 512,
+            "id_experiment": "01",
+            "wandb_project": "Weight_Regression"
+        },
+
+        "train_age": {
+            "seed": 27,
+            "epochs": 10000,
+            "img_size": 224,
+            "num_frames": 40,
+            "batch_size": 32,
+            "learning_rate": 0.0001,
+            "units": 512,
+            "id_experiment": "02",
+            "wandb_project": "Age_Regression"
+        }
+
+    },
+
+    "MLP": {
+            
+        "train_sex": {
+            "seed": 27
+        },
+
+        "train_weight": {
+            "seed": 27
+        },
+
+        "train_age": {
+            "seed": 27
+        }
+    },
+
+    "XGBoost": {
+
+        "train_sex": {
+            "seed": 27,
+            "njobs": 10,
+            "splits": 3,
+            "hyperparameters_search_space": "/opt2/data/datasets/UCA-GAIT/code/train/xgboost/grid_search.json"
+        },
+
+        "train_weight": {
+            "seed": 27,
+            "njobs": 10,
+            "splits": 3,
+            "hyperparameters_search_space": "/opt2/data/datasets/UCA-GAIT/code/train/xgboost/grid_search.json"
+        },
+
+        "train_age": {
+            "seed": 27,
+            "njobs": 10,
+            "splits": 3,
+            "hyperparameters_search_space": "/opt2/data/datasets/UCA-GAIT/code/train/xgboost/grid_search.json"
+        }
+
+    }
+
+
+
+
+
+}
