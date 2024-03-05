@@ -10,7 +10,7 @@
 
     "MoviNet": {
 
-        "train_sex": {
+        "train_Sex": {
             "seed": 27,
             "epochs": 10000,
             "img_size": 224,
@@ -21,7 +21,7 @@
             "wandb_project": "Sex_Classification"
         },
 
-        "train_weight": {
+        "train_Weight": {
             "seed": 27,
             "epochs": 10000,
             "img_size": 224,
@@ -33,7 +33,7 @@
             "wandb_project": "Weight_Regression"
         },
 
-        "train_age": {
+        "train_Age": {
             "seed": 27,
             "epochs": 10000,
             "img_size": 224,
@@ -47,38 +47,38 @@
 
     },
 
-    "MLP": {
+    "mlp": {
             
-        "train_sex": {
+        "train_Sex": {
             "seed": 27
         },
 
-        "train_weight": {
+        "train_Weight": {
             "seed": 27
         },
 
-        "train_age": {
+        "train_Age": {
             "seed": 27
         }
     },
 
-    "XGBoost": {
+    "xgboost": {
 
-        "train_sex": {
+        "train_Sex": {
             "seed": 27,
             "njobs": 10,
             "splits": 3,
             "hyperparameters_search_space": "/opt2/data/datasets/UCA-GAIT/code/train/xgboost/grid_search.json"
         },
 
-        "train_weight": {
+        "train_Weight": {
             "seed": 27,
             "njobs": 10,
             "splits": 3,
             "hyperparameters_search_space": "/opt2/data/datasets/UCA-GAIT/code/train/xgboost/grid_search.json"
         },
 
-        "train_age": {
+        "train_Age": {
             "seed": 27,
             "njobs": 10,
             "splits": 3,
