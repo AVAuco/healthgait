@@ -5,6 +5,13 @@ COMING SOON
 
 _INSERT GIFS SHOWING THE DIFFERENT MODALITIES_
 
+<p align="center">
+    <img src="./media/Semantic_Segmentation.gif" width="300">
+    <img src="./media/Silhouette.gif" width="300">
+    <img src="./media/TVL1.gif" width="300">
+    <br>
+</p>
+
 ## Description
 This repository contains the Health and Gait dataset, which includes multimodal features extracted from videos. The dataset is intended for use in health, sports and gait analysis research.
 
