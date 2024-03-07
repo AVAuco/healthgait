@@ -8,7 +8,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Technical validation of the HealthGait dataset.")
 
     parser.add_argument("--config", type=str, required=True, help="Path to the config file")
-    parser.add_argument("--device", type=int, help="Device to run the experiments")
+    parser.add_argument("--device", type=int, default=0, help="Device to run the experiments")
     parser.add_argument("--targets", nargs='+', required=True, help="list with the targets to estimate")
     parser.add_argument('--methods', nargs='+', required=True, help='list with the clases names to classifier')
 
@@ -24,17 +24,17 @@ def load_config(config_path):
     return config
 
 
-def base_command_MoviNet(partitions_path, data_path, patients_measures, 
-                         save_dir, device, target, model_id, data_type, partition, 
-                         id_experiment, seed, num_frames, img_size, batch_size,
-                         learning_rate, epochs, wandb_project, data_class, classes_names=None,
-                         units=None, optical_flow_method=None):
+def base_command_MoviNet(mode, partitions_path, data_path, patients_measures, 
+                         save_dir, device, target, model_id, data_type, 
+                         seed, num_frames, img_size, batch_size, learning_rate, 
+                         data_class, partition, epochs=None, id_experiment=None, 
+                         wandb_project=None, classes_names=None, units=None, 
+                         optical_flow_method=None, n_decimals=None):
     
     experiment_name = f"{id_experiment}: Data_type {data_type}, Data_Class {data_class}, Num_Frames {num_frames}, Model_ID {model_id}, SEED {seed}"
 
-    save_dir = os.path.join(save_dir, "MoviNet")
     
-    base_command = f"python train_MoviNet_{'classification' if target == 'Sex' else 'regression'}.py --partitions_file {partitions_path}/partition_{partition}.json " \
+    base_command = f"python {mode}_MoviNet_{'classification' if target == 'Sex' else 'regression'}.py --partitions_file {partitions_path}/partition_{partition}.json " \
                     f"--data_path {data_path} " \
                     f"--patients_info {patients_measures} " \
                     f"--num_frames {num_frames} " \
@@ -42,24 +42,39 @@ def base_command_MoviNet(partitions_path, data_path, patients_measures,
                     f"--batch_size {batch_size} " \
                     f"--model_id {model_id} " \
                     f"--learning_rate {learning_rate} " \
-                    f"--id_partition {partition} " \
-                    f"--save_dir {save_dir} " \
-                    f"--epochs {epochs} " \
                     f"--device {device} " \
                     f"--data_class {data_class} " \
                     f"--data_type {data_type} " \
-                    f"--id_experiment {id_experiment} " \
                     f"--seed {seed} " \
-                    f"--wandb_project {wandb_project} " \
                     f"--target {target} " \
-                    f"--experiment_name \"{experiment_name}\""
+                    f"--id_partition {partition} "
+    
+    if mode == 'train':
+
+        save_dir = os.path.join(save_dir, "MoviNet")
+
+        base_command += f"--epochs {epochs} " \
+                        f"--id_experiment {id_experiment} " \
+                        f"--wandb_project {wandb_project} " \
+                        f"--experiment_name \"{experiment_name}\" " \
+                        f"--save_dir {save_dir} "
+
+    else:
+
+        checkpoint = os.path.join(save_dir, experiment_name, f"Partition {partition}", "checkpoint", "checkpoint")
+
+        save_dir = os.path.join(save_dir, "MoviNet", experiment_name, f"Partition {partition}")
+
+        base_command += f"--checkpoint {checkpoint} " \
+                        f"--n_decimals {n_decimals} " \
+                        f"--save_dir {save_dir} "
                         
     # For classification tasks, classes_names must be provided
     if target == 'Sex':
-        base_command += f" --classes_names {classes_names}"
+        base_command += f" --classes_names {classes_names} "
     # For regression tasks, units must be provided
     else:
-        base_command += f" --units {units}"
+        base_command += f" --units {units} "
 
     if optical_flow_method:
         base_command += f" --optical_flow_method {optical_flow_method}"
@@ -112,23 +127,20 @@ def run_experiments(config, method, target, device = 0):
     patients_measures = config["patients_measures"]
 
     # Classification and regression movinet experiments 
-    if method == "MoviNet":
+    if method == "movinet":
 
         common_parameters = {
             "partitions_path": partitions_path,
             "data_path": data_path,
             "patients_measures": patients_measures,
-            "save_dir": save_dir,
             "device": device,
             "target": target,
-            "seed": config["MoviNet"][f"train_{target}"]["seed"],
-            "epochs": config["MoviNet"][f"train_{target}"]["epochs"],
-            "img_size": config["MoviNet"][f"train_{target}"]["img_size"],
-            "num_frames": config["MoviNet"][f"train_{target}"]["num_frames"],
-            "batch_size": config["MoviNet"][f"train_{target}"]["batch_size"],
-            "learning_rate": config["MoviNet"][f"train_{target}"]["learning_rate"],
-            "id_experiment": config["MoviNet"][f"train_{target}"]["id_experiment"],
-            "wandb_project": config["MoviNet"][f"train_{target}"]["wandb_project"]
+            "save_dir": save_dir,
+            "seed": config[method][f"train_{target}"]["seed"],
+            "img_size": config[method][f"train_{target}"]["img_size"],
+            "num_frames": config[method][f"train_{target}"]["num_frames"],
+            "batch_size": config[method][f"train_{target}"]["batch_size"],
+            "learning_rate": config[method][f"train_{target}"]["learning_rate"],
         }
 
         for model_id in ['a0', 'a5']:
@@ -142,21 +154,50 @@ def run_experiments(config, method, target, device = 0):
                         if target == "Sex":
                             classes_names = ["woman", "man"]
                         else:
-                            units = config["Movinet"][f"train_{target}"]["units"]
+                            units = config[method][f"train_{target}"]["units"]
                             
                         optical_flow_methods = ['GMFLOW', 'TVL1'] if data_type == 'optical_flow' else [None]
                         
                         for optical_flow_method in optical_flow_methods:
                             command = base_command_MoviNet(
+                                mode = "train",
+                                epochs = config[method][f"train_{target}"]["epochs"],
+                                id_experiment = config[method][f"train_{target}"]["id_experiment"],
+                                wandb_project = config[method][f"train_{target}"]["wandb_project"],
                                 classes_names=classes_names if target == 'Sex' else None,
                                 units=units if target != 'Sex' else None,
-                                model_id=model_id, data_type=data_type if optical_flow_method is None else f"{data_type} {optical_flow_method}",
-                                partition=partition, optical_flow_method=optical_flow_method, data_class=data_class, **common_parameters
+                                model_id=model_id, 
+                                data_type=data_type if optical_flow_method is None else f"{data_type} {optical_flow_method}",
+                                partition=partition, 
+                                optical_flow_method=optical_flow_method, data_class=data_class, **common_parameters
                             )
+
+                            run_command(command)
+
+                            command = base_command_MoviNet(
+                                mode = "evaluate",
+                                n_decimals = 3,
+                                classes_names=classes_names if target == 'Sex' else None,
+                                units=units if target != 'Sex' else None,
+                                model_id=model_id, 
+                                data_type=data_type if optical_flow_method is None else f"{data_type} {optical_flow_method}",
+                                partition=partition, 
+                                optical_flow_method=optical_flow_method, data_class=data_class, **common_parameters
+                            )
+
                             run_command(command)
 
                             print("MoviNet finished")
 
+
+                    results_path = os.path.join(config["evaluations_save_dir"], target, data_type)
+                    # Get means
+                    command = f"python get_means.py --results_path {results_path} --n_decimals 3"
+                    
+                    run_command(command)
+
+
+                        
     # XGBoost and MLP experiments
     elif method == "xgboost" or method == "mlp":
 
@@ -237,8 +278,6 @@ def main(args):
 
             run_experiments(config, method.lower(), target.capitalize(), args.device)
 
-    # Run MoviNet evaluations
-    os.chdir("../evaluation/")
             
 
 if __name__ == "__main__":

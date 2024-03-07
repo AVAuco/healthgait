@@ -1,14 +1,14 @@
 {
 
     "data_path": "/opt2/data/datasets/UCA-GAIT/",
-    "partitions_path": "../partitions/",
-    "save_dir": "../train_results/",
+    "partitions_path": "/opt2/data/datasets/UCA-GAIT/healthgait/partitions",
+    "save_dir": "/opt2/data/datasets/UCA-GAIT/healthgait/train_results/",
 
     "patients_measures": "/opt2/data/datasets/UCA-GAIT/patients_measures.csv",
     "gait_parameters": "/opt2/data/datasets/UCA-GAIT/gait_parameters.csv",
     "gait_parameters_estimation": "/opt2/data/datasets/UCA-GAIT/gait_parameters_estimation.csv",
 
-    "MoviNet": {
+    "movinet": {
 
         "train_Sex": {
             "seed": 27,
@@ -68,21 +68,21 @@
             "seed": 27,
             "njobs": 10,
             "splits": 3,
-            "hyperparameters_search_space": "../configfiles/grid_search.json"
+            "hyperparameters_search_space": "/opt2/data/datasets/UCA-GAIT/healthgait/configfiles/grid_search.json"
         },
 
         "train_Weight": {
             "seed": 27,
             "njobs": 10,
             "splits": 3,
-            "hyperparameters_search_space": "../configfiles/grid_search.json"
+            "hyperparameters_search_space": "/opt2/data/datasets/UCA-GAIT/healthgait/configfiles/grid_search.json"
         },
 
         "train_Age": {
             "seed": 27,
             "njobs": 10,
             "splits": 3,
-            "hyperparameters_search_space": "../configfiles/grid_search.json"
+            "hyperparameters_search_space": "/opt2/data/datasets/UCA-GAIT/healthgait/configfiles/grid_search.json"
         }
 
     }
