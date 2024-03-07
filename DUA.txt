@@ -1,0 +1,46 @@
+# Data Use Agreement for Health&Gait Dataset
+1. Introduction
+This Data Use Agreement (DUA) pertains to the Health&Gait Dataset (hereinafter referred to as "the Dataset"), which consists of video recordings of individuals walking in a controlled environment. The Dataset is made available exclusively for academic and research purposes under the terms and conditions set forth in this Agreement.
+
+2. Parties
+This Agreement is between the Dataset Provider (hereinafter referred to as "Provider") and the Recipient (the individual or entity agreeing to these terms).
+
+3. Data Description
+The Dataset includes video recordings of individuals walking. These recordings were collected in a private setting where individuals were informed and consented to the recording and use of their likenesses for research purposes.
+
+4. Permitted Use
+The Dataset is provided to the Recipient solely for the purpose of conducting academic and research activities. Any use of the Dataset beyond this scope is strictly prohibited unless expressly authorized by the Provider in writing.
+
+5. Restrictions on Use
+a. The Recipient shall not use the Dataset for commercial purposes.
+b. The Recipient shall not attempt to identify or contact any individuals featured in the Dataset.
+c. The Recipient shall not share, distribute, or otherwise make the Dataset available to third parties without the express written consent of the Provider.
+d. The Recipient agrees to implement reasonable security measures to prevent unauthorized access to the Dataset.
+
+6. Attribution
+When publishing or presenting results derived from the Dataset, the Recipient must acknowledge the source of the data as specified by the Provider.
+
+7. Compliance with Laws
+The Recipient agrees to comply with all applicable laws, regulations, and guidelines related to privacy and data protection in their use of the Dataset.
+
+8. Termination
+The Provider reserves the right to terminate this Agreement and revoke access to the Dataset at any time if the Recipient is found to be in violation of any terms and conditions specified herein.
+
+9. Disclaimer
+The Dataset is provided "as is" without any warranty of any kind, either express or implied. The Provider disclaims all liability for any damages arising from the use of the Dataset.
+
+10. Governing Law
+This Agreement shall be governed by the laws of the jurisdiction in which the Provider operates.
+
+11. Signature
+By accessing or using the Dataset, the Recipient acknowledges that they have read, understood, and agreed to be bound by the terms and conditions of this Data Use Agreement.
+
+Date: _______________
+
+For the Recipient:
+
+Name: _________________________
+
+Position: ______________________
+
+Signature: _____________________

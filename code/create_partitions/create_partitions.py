@@ -12,7 +12,7 @@ def parse_opt():
     parser.add_argument('--validation_ratio', type=float, required=True)
     parser.add_argument('--patients_measures', type=str, required=True)
     parser.add_argument('--output_path', type=str, required=True)
-    parser.add_argument('--k_fold', type=int)
+    parser.add_argument('--k_fold', type=int, default = 4)
     parser.add_argument('--variables', nargs='+', required=True)
     parser.add_argument('--age_range', type=str, choices=['young', 'adult', 'old'], required=False)
     parser.add_argument('--seed', type=int, required=True)

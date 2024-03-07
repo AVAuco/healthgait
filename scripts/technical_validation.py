@@ -236,6 +236,9 @@ def main(args):
         for method in args.methods:
 
             run_experiments(config, method.lower(), target.capitalize(), args.device)
+
+    # Run MoviNet evaluations
+    os.chdir("../evaluation/")
             
 
 if __name__ == "__main__":

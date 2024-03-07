@@ -1,21 +1,56 @@
 #!/bin/bash
 
+# Command line arguments
 
-source /opt/data/jzafra/miniconda3/etc/profile.d/conda.sh
-conda activate uca_gait
+patient_file=""
+patient_provided=0 
+
+output_path=""
+output_provided=0
 
 validation_ratio=0.10
-patients_measures='/opt2/data/datasets/UCA-GAIT/patients_measures.csv'
 seed=27
 k_fold=4
 
+while getopts "p:o:v:s:k:" opt; do
+  case ${opt} in
+    p )
+      patient_file=$OPTARG
+      patient_provided=1
+      ;;
+    o )
+      output_path=$OPTARG
+      output_provided=1
+      ;;
+    v )
+      validation_ratio=$OPTARG
+      ;;
+    s )
+        seed=$OPTARG
+        ;;
+    k )
+        k_fold=$OPTARG
+        ;;
+    \? ) echo "Usage: cmd -p <patient_measures_file> -o <output_path> -v [validation_ratio] -s [seed] -k [k_fold]"
+         exit 1
+      ;;
+  esac
+done
 
-# variables="Age Sex"
+if [ $patient_provided -eq 0 ] || [ $output_provided -eq 0 ]; then
+    echo "Error: Missing arguments."
+    echo "Usage: cmd -p <patient_measures_file> -o <output_path> -v [validation_ratio] -s [seed] -k [k_fold]"
+    exit 1
+fi
 
-SEX PARTITIONS
+cd ../code/create_partitions/
+
+variables="Age Sex"
+
+#SEX PARTITIONS
 python create_partitions.py --validation_ratio $validation_ratio \
-    --patients_measures $patients_measures \
-    --output_path '/opt2/data/datasets/UCA-GAIT/code/partitions/Sex' \
+    --patients_measures $patient_file \
+    --output_path "$output_path/Sex" \
     --k_fold $k_fold \
     --seed $seed \
     --variables $variables \
@@ -24,11 +59,11 @@ python create_partitions.py --validation_ratio $validation_ratio \
 
 # WEIGHT PARTITIONS
 
-# variables="Sex BMI"
+variables="Sex BMI"
 
 python create_partitions.py --validation_ratio $validation_ratio \
-    --patients_measures $patients_measures \
-    --output_path '/opt2/data/datasets/UCA-GAIT/code/partitions/Weight' \
+    --patients_measures $patient_file \
+    --output_path "$output_path/Weight" \
     --k_fold $k_fold \
     --seed $seed \
     --variables $variables \
@@ -40,8 +75,8 @@ python create_partitions.py --validation_ratio $validation_ratio \
 variables="Age Sex"
 
 python create_partitions.py --validation_ratio $validation_ratio \
-    --patients_measures $patients_measures \
-    --output_path '/opt2/data/datasets/UCA-GAIT/code/partitions/Age' \
+    --patients_measures $patient_file \
+    --output_path "$output_path/Age" \
     --k_fold $k_fold \
     --seed $seed \
     --variables $variables \
