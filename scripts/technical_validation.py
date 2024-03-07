@@ -27,7 +27,7 @@ def load_config(config_path):
 def base_command_MoviNet(mode, partitions_path, data_path, patients_measures, 
                          save_dir, device, target, model_id, data_type, 
                          seed, num_frames, img_size, batch_size, learning_rate, 
-                         data_class, partition, epochs=None, id_experiment=None, 
+                         data_class, partition, id_experiment, epochs=None,
                          wandb_project=None, classes_names=None, units=None, 
                          optical_flow_method=None, n_decimals=None):
     
@@ -57,17 +57,17 @@ def base_command_MoviNet(mode, partitions_path, data_path, patients_measures,
                         f"--id_experiment {id_experiment} " \
                         f"--wandb_project {wandb_project} " \
                         f"--experiment_name \"{experiment_name}\" " \
-                        f"--save_dir {save_dir} "
+                        f"--save_dir \"{save_dir}\" "
 
     else:
 
-        checkpoint = os.path.join(save_dir, experiment_name, f"Partition {partition}", "checkpoint", "checkpoint")
+        checkpoint = os.path.join(save_dir, "MoviNet", experiment_name, f"Partition {partition}", "checkpoint", "checkpoint")
 
-        save_dir = os.path.join(save_dir, "MoviNet", experiment_name, f"Partition {partition}")
+        save_dir = os.path.join(save_dir, "MoviNet", experiment_name, f"Partition {partition}", "evaluation")
 
-        base_command += f"--checkpoint {checkpoint} " \
+        base_command += f"--checkpoint \"{checkpoint}\" " \
                         f"--n_decimals {n_decimals} " \
-                        f"--save_dir {save_dir} "
+                        f"--save_dir \"{save_dir}\" "
                         
     # For classification tasks, classes_names must be provided
     if target == 'Sex':
@@ -78,7 +78,6 @@ def base_command_MoviNet(mode, partitions_path, data_path, patients_measures,
 
     if optical_flow_method:
         base_command += f" --optical_flow_method {optical_flow_method}"
-
 
     return base_command
 
@@ -118,7 +117,6 @@ def run_command(command):
     subprocess.run(command, shell=True)
 
 
-
 def run_experiments(config, method, target, device = 0):
 
     data_path = config["data_path"]
@@ -152,7 +150,7 @@ def run_experiments(config, method, target, device = 0):
 
                         # Adjust command based on target and data type
                         if target == "Sex":
-                            classes_names = ["woman", "man"]
+                            classes_names = "woman man"
                         else:
                             units = config[method][f"train_{target}"]["units"]
                             
@@ -176,6 +174,7 @@ def run_experiments(config, method, target, device = 0):
 
                             command = base_command_MoviNet(
                                 mode = "evaluate",
+                                id_experiment = config[method][f"train_{target}"]["id_experiment"],
                                 n_decimals = 3,
                                 classes_names=classes_names if target == 'Sex' else None,
                                 units=units if target != 'Sex' else None,
@@ -188,11 +187,6 @@ def run_experiments(config, method, target, device = 0):
                             run_command(command)
 
                             print("MoviNet finished")
-
-
-                    results_path = os.path.join(config["evaluations_save_dir"], target, data_type)
-                    # Get means
-                    command = f"python get_means.py --results_path {results_path} --n_decimals 3"
                     
                     run_command(command)
 
@@ -225,7 +219,7 @@ def run_experiments(config, method, target, device = 0):
         }
 
         if target == "Sex":
-            classes_names = ["woman", "man"]
+            classes_names = "woman man"
         else:
             classes_names = None
 

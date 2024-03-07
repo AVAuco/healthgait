@@ -335,7 +335,8 @@ def main(args):
     ############################################################################
 
     # Creación directorios para almacenar los resultados
-    results_path = os.path.join(SAVE_DIR, pathlib.Path(PARTITIONS_FILE).stem)
+    #results_path = os.path.join(SAVE_DIR, pathlib.Path(PARTITIONS_FILE).stem)
+    results_path = SAVE_DIR
     pathlib.Path(results_path).mkdir(parents=True, exist_ok=True)
 
     y_trues = []

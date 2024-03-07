@@ -446,21 +446,6 @@ def main(args):
 
     wandb.sklearn.plot_confusion_matrix(y_trues, y_preds, CLASSES_NAMES)
 
-
-    cm = confusion_matrix(y_trues, y_preds)
-
-    # Normalise
-    cmn = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
-    fig, ax = plt.subplots(figsize=(10,10))
-    sns.heatmap(cmn, annot=True, fmt='.2f', xticklabels = CLASSES_NAMES, yticklabels = CLASSES_NAMES, cmap = 'Blues')
-    plt.ylabel('Actual')
-    plt.xlabel('Predicted')
-
-    plt.savefig(os.path.join(SAVE_DIR, GROUP_NAME, run_name, "cm.png"))
-
-    plt.clf()
-
-
     ############################################################################
     ########################### CLASSIFICATION EXAMPLE #########################
     ############################################################################
@@ -481,9 +466,7 @@ def main(args):
 
     wandb.log({f"Ejemplo {test_file}: Clase real: {CLASSES_NAMES[y_real]}. Clase predicha: {CLASSES_NAMES[y_pred]}": [wandb.Image(img) for img in video_frames]})
 
-
     wandb.finish()
-
 
 
 if __name__ == "__main__":
