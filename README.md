@@ -7,12 +7,12 @@
     <img src="./media/TVL1.gif" width="300">
     <img src="./media/GMFLow.gif" width="300">
     <br>
-    <sup>The differents data modalities contains in the dataset. From left to right shows pose, semantic segmentation, silhouette and optical flow.</sup>
+    <sup>The different data modalities contained in the dataset. From left to right shows pose, semantic segmentation, silhouette and optical flow.</sup>
 </p>
 
 
 ## Description
-This repository contains the **Health&Gait** dataset, the first that enables gait analysis using visual information without specific sensors, relying solely on cameras. The dataset includes multimodal features extracted from videos and gait parameters and anthropometric measurement from each participant. The dataset is intended for use in health, sports and gait analysis research.
+This repository contains the **Health&Gait** dataset, the first that enables gait analysis using visual information without specific sensors, relying solely on cameras. The dataset includes multimodal features extracted from videos, and gait parameters and anthropometric measurements from each participant. This dataset is intended for use in health, sports and gait analysis research.
 
 <p align="center">
     <img src="./media/Data_Records.png" width="850">
@@ -29,7 +29,7 @@ Health&Gait consists of 1,564 videos of 398 participants walking in a controlled
 - Optical flow by [**TVL1**](https://docs.opencv.org/3.4/dc/d47/classcv_1_1DualTVL1OpticalFlow.html) and [**GMFlow**](https://github.com/haofeixu/gmflow) (PNG images).
 - Silhouette by [**YOLOV8**](https://github.com/ultralytics/ultralytics) (JPEG images).
 
-Moreover, for each participants the following data has been recorded:
+Moreover, for each subject, the following data has been recorded:
 
 - Anthropometric measurements.
 - Gait parameters obtained from OptoGait and MuscleLAB.
@@ -86,12 +86,12 @@ Moreover, for each participants the following data has been recorded:
 
 ### Download Dataset
 
-The dataset will be accesible under request upon acceptance of the paper. A script for downloading the dataset will be provided. You will need to request my password via [email](#Contact).
+Upon acceptance of the paper, the dataset will be accessible upon request. A script for downloading the dataset will be provided. You will need to request an access password via [email](#Contact).
 
 
 ### Install dependencies
 
-The first is to create a python environment from the **requirement.txt** file. The use of [**conda**](https://docs.anaconda.com/free/miniconda/miniconda-install/) is recommended.
+The first is to create a Python environment from the **requirement.txt** file. The use of [**conda**](https://docs.anaconda.com/free/miniconda/miniconda-install/) is recommended.
 
 
 ```
@@ -99,15 +99,15 @@ conda create --name <env> --file requirement.txt
 conda activate <env>
 ```
 
-Check if Tensorflow are installed correctly:
+Check if Tensorflow is installed correctly:
 
 ```
 python3 -c "import tensorflow as tf; print(len(tf.config.list_physical_devices('GPU')) > 0)"
 ```
 
 ## Usage
-The following is an indication of how to use the various scripts provided in the repository
-as well as a recommendation on how to load and use the dataset. The first thing is to access th directory within the repository where the scripts are located:
+The following indicates how to use the various scripts provided in the repository
+and a recommendation on how to load and use the dataset. The first thing is to access the directory within the repository where the scripts are located:
 
 ```
 cd scripts/
@@ -127,7 +127,7 @@ where:
 
 ### Technical Validation
 
-The following script can be used to obtained the results presented in the **technical validation** sections in the paper:
+The following script can be used to obtain the results presented in the **technical validation** sections in the paper:
 
 ```
 python technical_validation.py --config '../configfiles/train_configfile.json' --targets {sex, weight, age} --methods {MoviNet, XGBoost, MLP}
@@ -141,7 +141,7 @@ where ***train_configfile.json*** is a configuration file where you need to set 
 - **"patients_measures"**: file with the anthropometric data of the participants.
 - **"gait_parameters"**: file with the information of the gait parameters.
 - **"gait_parameters_estimation"**: file with the information of the estimated gait parameters.
-- **"hyperparameters_search_space"**: json file where the hyperparameters search space of the XGBoost method is defined.
+- **"hyperparameters_search_space"**: JSON file where the hyperparameters search space of the XGBoost method is defined.
 
 You can tell the script from which **target** to get the results and which **methods** to use to do so.
 
@@ -157,7 +157,7 @@ where:
 - **-p** is used to indicate the path to the ***participants_measures.csv*** file.
 - **-s** is the path to the directory with the bounding boxes of OptoGait sensors (for more information [contact](#Contact) me).
 - **-e** is the path to the directory with the semantic segmentation.
-- **-o** is the path to the csv file where we want to store the estimates.
+- **-o** is the path to the CSV file where we want to store the estimates.
 - **-k** is used to indicate the scale of the scene to obtain real measurements.
 - **-f** is used to indicate the fps rate needed to obtain the gait parameters related to time.
 
@@ -177,7 +177,7 @@ class FrameGenerator:
       Args:
         path: Video file paths.
         n_frames: Number of frames. 
-        training: Boolean to determine if training dataset is being created.
+        training: Boolean to determine if a training dataset is being created.
     """
     self.videos_names = videos_names
     self.n_frames = n_frames
@@ -223,7 +223,7 @@ def format_frames(frame, output_size):
     Pad and resize an image from a video.
 
     Args:
-      frame: Image that needs to resized and padded. 
+      frame: Image that needs to be resized and padded. 
       output_size: Pixel size of the output frame image.
 
     Return:
@@ -298,7 +298,7 @@ def get_data(PARTITIONS_FILE, DATA_PATH, DATA_TYPE, DATA_CLASS, OPTICAL_FLOW_MET
 
 <details><summary> <b>Define and use DataGenerators</b> </summary>
 
-The following code shows how to define the data generators for the three datasets, making used of the methods ***from_generator***:
+The following code shows how to define the data generators for the three datasets, making use of the methods ***from_generator***:
 
 ``` python
 output_signature = (tf.TensorSpec(shape = (None, None, None, 3), dtype = tf.float32),
@@ -341,7 +341,7 @@ y_preds = model.predict(test_ds)
 
 
 ## License
-Health&Gait is freely available for free non-commercial use, and may be redistributed under these conditions. Please, see the [license](./LICENSE) for further details.
+Health&Gait is freely available for free non-commercial use, but may not be redistributed without the authors' consent. Please, see the [license](./LICENSE) for further details.
 
 ## Citation
 ```bibtex
