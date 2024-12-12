@@ -86,7 +86,7 @@ Moreover, for each subject, the following data has been recorded:
 
 ### Download Dataset
 
-Upon acceptance of the paper, the dataset will be accessible upon request. A script for downloading the dataset will be provided. You will need to request an access password via [email](#Contact).
+The dataset is hosted in the following [Zenodo repository](https://zenodo.org/records/14039922).
 
 
 ### Install dependencies
