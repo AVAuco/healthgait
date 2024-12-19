@@ -354,9 +354,7 @@ Health&Gait is freely available for free non-commercial use, but may not be redi
   author = {Zafra, J. et al.},
   title = {Health&Gait: a video dataset for gait-based analysis},
   year = {2024},
-  publisher = {Under Review},
-  journal = {GitHub repository},
-  howpublished = {\url{https://github.com/AVAuco/healthgait}}
+  journal = {Sci Data}
 }
 ```
 
