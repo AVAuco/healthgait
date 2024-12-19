@@ -352,7 +352,7 @@ Health&Gait is freely available for free non-commercial use, but may not be redi
 ```bibtex
 @misc{zafra2024,
   author = {Zafra, J. et al.},
-  title = {Health&Gait: a video dataset for gait-based analysis},
+  title = {Health&Gait: a dataset for gait-based analysis},
   year = {2024},
   journal = {Sci Data}
 }
