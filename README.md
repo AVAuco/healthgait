@@ -350,11 +350,15 @@ Health&Gait is freely available for free non-commercial use, but may not be redi
 
 ## Citation
 ```bibtex
-@misc{zafra2024,
-  author = {Zafra, J. et al.},
-  title = {Health&Gait: a dataset for gait-based analysis},
-  year = {2024},
-  journal = {Sci Data}
+@article{zafra2024,
+author = {Zafra-Palma, Jorge and Marín-Jiménez, Nuria and  Castro-Piñero, José and Cuenca-García, Magdalena  and Muñoz-Salinas, Rafael and Marín-Jiménez, Manuel  J},
+title = {Health \& Gait: a dataset for gait-based analysis},
+journal = {Scientific Data},
+volume = {12},
+year = {2025},
+number = {1},
+issn = {2052-4463},
+doi = {10.1038/s41597-024-04327-4}
 }
 ```
 
