@@ -1,4 +1,6 @@
 # Health&Gait: a video dataset for gait-based analysis
+<p><a href="https://www.nature.com/articles/s41597-024-04327-4"><img src="https://img.shields.io/badge/READ-the_paper-blue"></a> &nbsp; <img src="https://img.shields.io/twitter/follow/ucoava">
+</p>
 
 <p align="center">
     <img src="./media/Pose.gif" width="300">
