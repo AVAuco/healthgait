@@ -345,7 +345,7 @@ y_preds = model.predict(test_ds)
 
 The document detailing the computational experiments conducted to perform quality control on the data is below.
 
-[Health\&Gait Additional Material](media/HealthGait_Results.pdf)
+[Health\&Gait Additional Material](https://www.researchgate.net/publication/393085119_Using_gait_to_monitor_health_an_experimental_baseline)
 
 ## License
 Health&Gait is freely available for free non-commercial use, but may not be redistributed without the authors' consent. Please, see the [license](./LICENSE) for further details.
