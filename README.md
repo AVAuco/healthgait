@@ -364,5 +364,38 @@ doi = {10.1038/s41597-024-04327-4}
 }
 ```
 
+## Related Works
+
+```bibtex
+@inproceedings{zafra2025,
+author = {Zafra-Palma, Jorge and Marín-Jiménez, Nuria and  Castro-Piñero, José and Cuenca-García, Magdalena  and Muñoz-Salinas, Rafael and Marín-Jiménez, Manuel  J},
+title = {Using gait to monitor health: an experimental baseline},
+booktitle = {IbPRIA 2025: 12th Iberian Conference on Pattern Recognition and Image Analysis},
+year = {2025},
+doi = {}
+}
+```
+
+
+```bibtex
+@inproceedings{aguilar2025,
+author = {Aguilar-Ortega, Rafael and Marín-Jiménez, Manuel},
+title = {What Does Gait Reveal About Health? Investigating Human Motion as an Indicator},
+booktitle = {CAIP 2025 : 21st International Conference in Computer Analysis of Images and Patterns},
+year = {2025},
+doi = {}
+}
+```
+
+```bibtex
+@inproceedings{cubero2025,
+author    = {Cubero, Nicolás and Zafra-Palma, Jorge and Castro, Francisco M. and Guil, Nicolás and Marín-Jiménez, Manuel J.},
+title     = {Leveraging Implicit 3D Geometry for Biometric and Anthropometric Estimation from Gait},
+booktitle = {IEEE International Joint Conference on Biometrics (IJCB 2025)},
+year      = {2025},
+doi       = {}
+}
+```
+
 ## Contact
 If you have any question or suggestion, contact us by **jzafra@uco.es**.
